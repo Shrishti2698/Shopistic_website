@@ -5,8 +5,8 @@ import { MoveRight } from "lucide-react";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "../lib/axios";
 
-const stripePromise = loadStripe(
-	"pk_test_51KZYccCoOZF2UhtOwdXQl3vcizup20zqKqT9hVUIsVzsdBrhqbUI2fE0ZdEVLdZfeHjeyFXtqaNsyCJCmZWnjNZa00PzMAjlcL"
+const stripePromise = loadStripe(   // get it from stripe.com
+	"pk_test_51Qziiq2fTsou5EmHje3K80lST03JB7TxZV1URUamjn2BoSvralXGwIF39uea4qLizQ4ipAUQGePJ3E4bOQHO72oV00oqc4HYH2"
 );
 
 const OrderSummary = () => {
@@ -24,15 +24,40 @@ const OrderSummary = () => {
 			couponCode: coupon ? coupon.code : null,
 		});
 
-		const session = res.data;
+		const session = res.data; // extracting the seession id from response
 		const result = await stripe.redirectToCheckout({
-			sessionId: session.id,
+			sessionId: session.id,  // sessionId should be equal to the session.id from the backend
 		});
 
 		if (result.error) {
 			console.error("Error:", result.error);
 		}
 	};
+
+	// const handlePayment = async () => {
+	// 	try {
+	// 	  const stripe = await stripePromise;
+	// 	  const res = await axios.post("/payments/create-checkout-session", {
+	// 		products: cart,
+	// 		couponCode: coupon ? coupon.code : null,
+	// 	  });
+	  
+	// 	  console.log("Checkout Session Response:", res.data); // Debugging
+	  
+	// 	  if (!res.data.id) {
+	// 		throw new Error("Invalid session ID returned from backend.");
+	// 	  }
+	  
+	// 	  const result = await stripe.redirectToCheckout({ sessionId: res.data.id });
+	  
+	// 	  if (result.error) {
+	// 		console.error("Stripe Redirect Error:", result.error);
+	// 	  }
+	// 	} catch (error) {
+	// 	  console.error("Payment Error:", error);
+	// 	}
+	//   };
+	  
 
 	return (
 		<motion.div

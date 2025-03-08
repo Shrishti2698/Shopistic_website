@@ -7,7 +7,7 @@ import Confetti from "react-confetti";
 
 const PurchaseSuccessPage = () => {
 	const [isProcessing, setIsProcessing] = useState(true);
-	const { clearCart } = useCartStore();
+	const { clearCart } = useCartStore();   // in the success case we'd like clear out the cart
 	const [error, setError] = useState(null);
 
 	useEffect(() => {

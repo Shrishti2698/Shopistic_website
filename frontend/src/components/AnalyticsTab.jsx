@@ -62,6 +62,7 @@ const AnalyticsTab = () => {
 					color='from-emerald-500 to-lime-700'
 				/>
 			</div>
+
 			<motion.div
 				className='bg-gray-800/60 rounded-lg p-6 shadow-lg'
 				initial={{ opacity: 0, y: 20 }}
