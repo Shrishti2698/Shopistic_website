@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { ShoppingCart, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCartStore } from "../stores/useCartStore";
 
-const FeaturedProducts = ({ featuredProducts }) => {
+const FeaturedProducts = ({ featuredProducts }) => {  // featuredProducts is a prop
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const [itemsPerPage, setItemsPerPage] = useState(4);
 
 	const { addToCart } = useCartStore();
 
 	useEffect(() => {
-		const handleResize = () => {
+		const handleResize = () => {  // for responsiveness
 			if (window.innerWidth < 640) setItemsPerPage(1);
 			else if (window.innerWidth < 1024) setItemsPerPage(2);
 			else if (window.innerWidth < 1280) setItemsPerPage(3);
@@ -17,7 +17,7 @@ const FeaturedProducts = ({ featuredProducts }) => {
 		};
 
 		handleResize();
-		window.addEventListener("resize", handleResize);
+		window.addEventListener("resize", handleResize);  // whhenever the user resizes their screen we'd call the handleResize function
 		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 
@@ -71,6 +71,7 @@ const FeaturedProducts = ({ featuredProducts }) => {
 							))}
 						</div>
 					</div>
+
 					<button
 						onClick={prevSlide}
 						disabled={isStartDisabled}

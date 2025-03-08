@@ -74,11 +74,13 @@ export const useProductStore = create((set) => ({
 		}
 	},
 	
+
+	// FOR 'FEATURED' PRODUCTS.. TO BE ABLE TO FETCH THE PRODUCTS (BELOW THE PRODUCTS) in HomePage
 	fetchFeaturedProducts: async () => {
 		set({ loading: true });
 		try {
 			const response = await axios.get("/products/featured");
-			set({ products: response.data, loading: false });
+			set({ products: response.data, loading: false });  // upadting the products with the response
 		} catch (error) {
 			set({ error: "Failed to fetch products", loading: false });
 			console.log("Error fetching featured products:", error);

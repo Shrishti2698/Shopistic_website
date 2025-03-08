@@ -36,7 +36,7 @@ const HomePage = () => {
 					))}
 				</div>
 
-				{!isLoading && products.length > 0 && <FeaturedProducts featuredProducts={products} />}
+				 {!isLoading && products.length > 0 && <FeaturedProducts featuredProducts={products} />}  {/* FeaturedProducts component will be shown if we have any Featured products */}
 			</div>
 		</div>
 	);

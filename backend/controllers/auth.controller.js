@@ -104,6 +104,7 @@ export const logout = async (req, res) => {
 };
 
 // this will refresh the access token
+// the access token will expire in 15 mins but it would be handled and new one will be created immediately coz we would be getting 401 error
 export const refreshToken = async (req, res) => {
 	try {
 		const refreshToken = req.cookies.refreshToken;

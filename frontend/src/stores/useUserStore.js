@@ -56,7 +56,7 @@ export const useUserStore = create((set, get) => ({
 		}
 	},
 
-	refreshToken: async () => {
+	refreshToken: async () => {  // (related to upstash..redis) // 07:20:30
 		// Prevent multiple simultaneous refresh attempts
 		if (get().checkingAuth) return;
 
@@ -75,6 +75,9 @@ export const useUserStore = create((set, get) => ({
 // TODO: Implement the axios interceptors for refreshing access token
 
 // Axios interceptor for token refresh
+// we need to use refresh toiken of the admin and immediately create an access token
+// once we create the access token, the admin would be able to create a cart as if they've never been logged out
+// they'll not even realize that the access token has expired and we refreshed it (it's kinda a security check that the user doesn't have an idea of it)
 let refreshPromise = null;
 
 axios.interceptors.response.use(
@@ -84,7 +87,7 @@ axios.interceptors.response.use(
 		if (error.response?.status === 401 && !originalRequest._retry) {
 			originalRequest._retry = true;
 
-			try {
+			try {  // refresh token will get a new access token
 				// If a refresh is already in progress, wait for it to complete
 				if (refreshPromise) {
 					await refreshPromise;

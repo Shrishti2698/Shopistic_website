@@ -29,10 +29,10 @@ app.use("/api/coupons", couponRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/analytics", analyticsRoutes);
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "production") {  // for deplyment (production)
 	app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
-	app.get("*", (req, res) => {
+	app.get("*", (req, res) => {  // if user visits any other routes other than the above ones then show index.html which is inside the dist folder, under the frontend
 		res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
 	});
 }

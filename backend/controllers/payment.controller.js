@@ -25,7 +25,7 @@ export const createCheckoutSession = async (req, res) => {
 					},
 					unit_amount: amount,
 				},
-				quantity: product.quantity || 1,
+				quantity: product.quantity || 1,  // if it is empty then 1
 			};
 		});
 
